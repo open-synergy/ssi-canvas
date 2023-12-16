@@ -19,6 +19,7 @@
         "ssi_transaction_terminate_mixin",
         "ssi_transaction_cancel_mixin",
         "ssi_transaction_pricelist_mixin",
+        "ssi_transaction_salesperson_mixin",
         "ssi_product_line_mixin",
         "base_automation",
         "ssi_product",
