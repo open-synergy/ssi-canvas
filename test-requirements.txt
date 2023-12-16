@@ -4,6 +4,7 @@ git+https://github.com/open-synergy/ssi-stock@14.0#subdirectory=setup/ssi_stock_
 git+https://github.com/open-synergy/ssi-stock@14.0#subdirectory=setup/ssi_stock_warehouse_m2o_configurator_mixin
 git+https://github.com/open-synergy/ssi-stock@14.0#subdirectory=setup/ssi_stock
 git+https://github.com/open-synergy/ssi-stock@14.0#subdirectory=setup/ssi_stock_canvas_operation
+git+https://github.com/open-synergy/ssi-sale@14.0#subdirectory=setup/ssi_sale
 git+https://github.com/open-synergy/ssi-mixin@14.0#subdirectory=setup/ssi_decorator
 git+https://github.com/open-synergy/ssi-mixin@14.0#subdirectory=setup/ssi_localdict_mixin
 git+https://github.com/open-synergy/ssi-mixin@14.0#subdirectory=setup/ssi_master_data_mixin
