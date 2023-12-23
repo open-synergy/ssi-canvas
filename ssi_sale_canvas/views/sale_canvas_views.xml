@@ -12,10 +12,10 @@
         <xpath expr="//field[@name='company_id']" position="after">
             <field name="date" />
             <field name="type_id" />
-            <field name="currency_id" />
-            <field name="pricelist_id" />
             <field name="sale_team_id" optional="hide" />
             <field name="salesperson_id" widget="many2one_avatar" />
+            <field name="currency_id" />
+            <field name="pricelist_id" />
             <field name="percent_delivered" widget="percentage" />
             <field name="percent_finished" widget="percentage" />
             <field name="outbound_warehouse_id" optional="hide" />
@@ -319,19 +319,29 @@
                 <group name="procurement_1" colspan="4" col="2">
                     <field name="procurement_group_id" />
                 </group>
-                <group name="procurement_2" colspan="4" col="2" invisible="0">
-                    <field name="uom_quantity" />
-                    <field name="qty_to_receipt" />
-                    <field name="qty_to_deliver" />
-                    <field name="qty_to_sell" />
-                    <field name="qty_received" />
-                    <field name="qty_delivered" />
-                    <field name="qty_sold" />
-                    <field name="percent_delivered" widget="progressbar" />
-                    <field name="percent_finished" widget="progressbar" />
-                    <field name="deliver_ok" />
-                    <field name="receipt_ok" />
-                    <field name="resolve_ok" />
+            </page>
+            <page name="quantity" string="Quantity">
+                <group name="procurement_2" colspan="4" col="3">
+                    <group name="procurement_2_1" colspan="1" col="2">
+                        <field name="uom_quantity" />
+                    </group>
+                    <group name="procurement_2_2" colspan="1" col="2">
+                        <field name="qty_to_receipt" />
+                        <field name="qty_to_deliver" />
+                        <field name="qty_to_sell" />
+                    </group>
+                    <group name="procurement_2_3" colspan="1" col="2">
+                        <field name="qty_received" />
+                        <field name="qty_delivered" />
+                        <field name="qty_sold" />
+                    </group>
+                </group>
+                <group name="procurement_3" colspan="4" col="2">
+                    <field name="percent_delivered" widget="percentage" />
+                    <field name="percent_finished" widget="percentage" />
+                    <field name="deliver_ok" invisible="1" />
+                    <field name="receipt_ok" invisible="1" />
+                    <field name="resolve_ok" invisible="1" />
                 </group>
             </page>
         </xpath>
