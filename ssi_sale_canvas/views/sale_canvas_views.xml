@@ -339,9 +339,9 @@
                 <group name="procurement_3" colspan="4" col="2">
                     <field name="percent_delivered" widget="percentage" />
                     <field name="percent_finished" widget="percentage" />
-                    <field name="deliver_ok" invisible="1" />
-                    <field name="receipt_ok" invisible="1" />
-                    <field name="resolve_ok" invisible="1" />
+                    <field name="deliver_ok" groups="base.group_no_one" />
+                    <field name="receipt_ok" groups="base.group_no_one" />
+                    <field name="resolve_ok" groups="base.group_no_one" />
                 </group>
             </page>
         </xpath>

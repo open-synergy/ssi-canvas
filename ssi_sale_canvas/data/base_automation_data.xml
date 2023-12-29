@@ -6,19 +6,15 @@
 <record id="sale_canvas_open_2_done" model="base.automation">
     <field name="action_server_id" ref="sale_canvas_action_done" />
     <field name="trigger">on_write</field>
-    <field
-                name="filter_pre_domain"
-            >[('resolve_ok','=',False),('state','=','open')]</field>
-    <field name="filter_domain">[('resolve_ok','=',True),('state','=','open')]</field>
+    <field name="filter_pre_domain">[('resolve_ok','=',False)]</field>
+    <field name="filter_domain">[('resolve_ok','=',True)]</field>
 </record>
 
 <record id="sale_canvas_done_2_open" model="base.automation">
     <field name="action_server_id" ref="sale_canvas_action_open" />
     <field name="trigger">on_write</field>
-    <field
-                name="filter_pre_domain"
-            >[('resolve_ok','=',True),('state','=','done')]</field>
-    <field name="filter_domain">[('resolve_ok','=',False),('state','=','done')]</field>
+    <field name="filter_pre_domain">[('resolve_ok','=',True)]</field>
+    <field name="filter_domain">[('resolve_ok','=',False)]</field>
 </record>
 </data>
 </odoo>
