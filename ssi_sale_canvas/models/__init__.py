@@ -10,4 +10,5 @@ from . import (
     sale_canvas_realization_line,
     stock_rule,
     stock_move,
+    sale_order_line,
 )
