@@ -66,9 +66,10 @@ class SaleCanvasRealizationLine(models.Model):
         store=True,
     )
     sale_line_uom_quantity = fields.Float(
-        string='SO Line Qty',
+        string="SO Line Qty",
         related="sale_line_id.product_uom_qty",
-        store=True)
+        store=True
+    )
 
     @api.constrains(
         "sale_line_product_id",
