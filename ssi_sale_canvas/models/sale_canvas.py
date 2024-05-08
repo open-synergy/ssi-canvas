@@ -695,7 +695,7 @@ class SaleCanvas(models.Model):
 
     def action_create_sale_order(self):
         for record in self.sudo():
-            record._create_sale_order()
+            record.with_context(force_update=True)._create_sale_order()
 
     def _create_sale_order(self):
         self.ensure_one()
