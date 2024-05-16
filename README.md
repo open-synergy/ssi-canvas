@@ -18,7 +18,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[ssi_sale_canvas](ssi_sale_canvas/) | 14.0.1.3.0 |  | Sale Canvas
+[ssi_sale_canvas](ssi_sale_canvas/) | 14.0.1.3.1 |  | Sale Canvas
 
 [//]: # (end addons)
 
