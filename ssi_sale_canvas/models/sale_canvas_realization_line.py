@@ -2,7 +2,7 @@
 # Copyright 2023 PT. Simetri Sinergi Indonesia
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models, _
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -66,12 +66,11 @@ class SaleCanvasRealizationLine(models.Model):
         store=True,
     )
     sale_line_uom_quantity = fields.Float(
-        string="SO Line Qty",
-        related="sale_line_id.product_uom_qty",
-        store=True
+        string="SO Line Qty", related="sale_line_id.product_uom_qty", store=True
     )
 
     @api.constrains(
+        "sale_line_id",
         "sale_line_product_id",
         "sale_line_uom_id",
         "sale_line_uom_quantity",
@@ -80,10 +79,16 @@ class SaleCanvasRealizationLine(models.Model):
         if self.env.context.get("force_update"):
             return False
         for rec in self:
-            if (rec.product_id != rec.sale_line_product_id
+            if rec.sale_line_id and (
+                rec.product_id != rec.sale_line_product_id
                 or rec.uom_id != rec.sale_line_uom_id
-                    or rec.uom_quantity != rec.sale_line_uom_quantity):
-                raise ValidationError(_("You cannot change item details that created from sale canvas menu."))
+                or rec.uom_quantity != rec.sale_line_uom_quantity
+            ):
+                raise ValidationError(
+                    _(
+                        "You cannot change item details that created from sale canvas menu."
+                    )
+                )
 
     def _create_sale_order_line(self):
         self.ensure_one()
