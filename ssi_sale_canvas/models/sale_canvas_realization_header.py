@@ -2,7 +2,7 @@
 # Copyright 2023 PT. Simetri Sinergi Indonesia
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models, _
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -95,10 +95,15 @@ class SaleCanvasRealizationHeader(models.Model):
     )
     def check_double_partner(self):
         for rec in self:
-            other_ids = self.search([
-                ("canvas_id", "=", rec.canvas_id.id),
-                ("partner_id", "=", rec.partner_id.id),
-                ("id", "!=", rec.id),
-            ])
+            other_ids = self.search(
+                [
+                    ("canvas_id", "=", rec.canvas_id.id),
+                    ("partner_id", "=", rec.partner_id.id),
+                    ("id", "!=", rec.id),
+                ]
+            )
             if other_ids:
-                raise ValidationError(_(f"Double partner {rec.partner_id.display_name} in realization is not allowed."))
+                raise ValidationError(
+                    _("Double partner %s in realization is not allowed.")
+                    % rec.partner_id.display_name
+                )
