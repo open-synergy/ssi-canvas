@@ -348,6 +348,7 @@ msgstr ""
 
 #. module: ssi_sale_canvas
 #: model:ir.model.fields,field_description:ssi_sale_canvas.field_sale_canvas__currency_id
+#: model_terms:ir.ui.view,arch_db:ssi_sale_canvas.sale_canvas_view_search
 msgid "Currency"
 msgstr ""
 
@@ -370,6 +371,16 @@ msgstr ""
 #: model:ir.model.fields,field_description:ssi_sale_canvas.field_sale_canvas__date
 #: model:ir.model.fields,field_description:ssi_sale_canvas.field_sale_canvas_realization_header__date
 msgid "Date"
+msgstr ""
+
+#. module: ssi_sale_canvas
+#: model_terms:ir.ui.view,arch_db:ssi_sale_canvas.sale_canvas_view_search
+msgid "Date: Month"
+msgstr ""
+
+#. module: ssi_sale_canvas
+#: model_terms:ir.ui.view,arch_db:ssi_sale_canvas.sale_canvas_view_search
+msgid "Date: Year"
 msgstr ""
 
 #. module: ssi_sale_canvas
@@ -1179,7 +1190,13 @@ msgid "Sales Route"
 msgstr ""
 
 #. module: ssi_sale_canvas
+#: model_terms:ir.ui.view,arch_db:ssi_sale_canvas.sale_canvas_view_search
+msgid "Sales Team"
+msgstr ""
+
+#. module: ssi_sale_canvas
 #: model:ir.model.fields,field_description:ssi_sale_canvas.field_sale_canvas__salesperson_id
+#: model_terms:ir.ui.view,arch_db:ssi_sale_canvas.sale_canvas_view_search
 msgid "Salesperson"
 msgstr ""
 
@@ -1284,6 +1301,7 @@ msgstr ""
 
 #. module: ssi_sale_canvas
 #: model:ir.model.fields,field_description:ssi_sale_canvas.field_sale_canvas__type_id
+#: model_terms:ir.ui.view,arch_db:ssi_sale_canvas.sale_canvas_view_search
 msgid "Type"
 msgstr ""
 
