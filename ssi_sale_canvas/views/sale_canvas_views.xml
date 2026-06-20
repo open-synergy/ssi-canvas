@@ -35,8 +35,51 @@
             name="inherit_id"
             ref="ssi_transaction_mixin.mixin_transaction_view_search"
         />
+    <field name="mode">primary</field>
     <field name="arch" type="xml">
-        <data />
+        <data>
+            <xpath expr="//search/field[last()]" position="after">
+                <field name="type_id" />
+                <field name="date" />
+                <field name="salesperson_id" />
+                <field name="sale_team_id" />
+                <field name="currency_id" />
+                <field name="outbound_warehouse_id" />
+                <field name="inbound_warehouse_id" />
+            </xpath>
+            <xpath expr="//group[@name='group_by']" position="inside">
+                <filter
+                        string="Type"
+                        name="groupby_type_id"
+                        context="{'group_by': 'type_id'}"
+                    />
+                <filter
+                        string="Date: Month"
+                        name="groupby_date_month"
+                        context="{'group_by': 'date:month'}"
+                    />
+                <filter
+                        string="Date: Year"
+                        name="groupby_date_year"
+                        context="{'group_by': 'date:year'}"
+                    />
+                <filter
+                        string="Salesperson"
+                        name="groupby_salesperson_id"
+                        context="{'group_by': 'salesperson_id'}"
+                    />
+                <filter
+                        string="Sales Team"
+                        name="groupby_sale_team_id"
+                        context="{'group_by': 'sale_team_id'}"
+                    />
+                <filter
+                        string="Currency"
+                        name="groupby_currency_id"
+                        context="{'group_by': 'currency_id'}"
+                    />
+            </xpath>
+        </data>
     </field>
 </record>
 
