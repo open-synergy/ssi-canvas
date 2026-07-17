@@ -19,6 +19,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [ssi_sale_canvas](ssi_sale_canvas/) | 14.0.1.5.0 |  | Sale Canvas
+[ssi_sale_canvas_operating_unit](ssi_sale_canvas_operating_unit/) | 14.0.1.0.0 |  | Sale Canvas + Operating Unit
 
 [//]: # (end addons)
 
