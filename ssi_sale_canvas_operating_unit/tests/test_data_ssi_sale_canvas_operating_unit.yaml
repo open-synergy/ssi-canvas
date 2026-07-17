@@ -1,0 +1,164 @@
+scenarios:
+  - name: "Create Sale Canvas with Operating Unit"
+    steps:
+      - step: "Get default warehouse"
+        action: "ref"
+        xml_id: "stock.warehouse0"
+        save_as: "warehouse"
+
+      - step: "Create inbound route"
+        action: "create"
+        model: "stock.location.route"
+        save_as: "inbound_route"
+        values:
+          name: "Test Inbound Route Canvas OU 1"
+
+      - step: "Create outbound route"
+        action: "create"
+        model: "stock.location.route"
+        save_as: "outbound_route"
+        values:
+          name: "Test Outbound Route Canvas OU 1"
+
+      - step: "Create canvas route"
+        action: "create"
+        model: "stock.location.route"
+        save_as: "canvas_route"
+        values:
+          name: "Test Canvas Route OU 1"
+
+      - step: "Create canvas type"
+        action: "create"
+        model: "sale_canvas_type"
+        save_as: "canvas_type"
+        values:
+          name: "Test Canvas Type OU 1"
+          code: "TCTOU1"
+
+      - step: "Create sale_canvas with operating_unit_id"
+        action: "create"
+        model: "sale_canvas"
+        save_as: "canvas"
+        as_user: "base.user_admin"
+        values:
+          type_id: "REC: canvas_type.id"
+          outbound_warehouse_id: "REC: warehouse.id"
+          inbound_warehouse_id: "REC: warehouse.id"
+          inbound_route_id: "REC: inbound_route.id"
+          outbound_route_id: "REC: outbound_route.id"
+          route_id: "REC: canvas_route.id"
+          outbound_location_id: "REC: warehouse.lot_stock_id.id"
+          inbound_location_id: "REC: warehouse.lot_stock_id.id"
+          pricelist_id: "REF: product.list0"
+          currency_id: "REF: base.USD"
+          salesperson_id: "REF: base.user_admin"
+          operating_unit_id: "REF: operating_unit.main_operating_unit"
+
+      - step: "Assert operating_unit_id is set"
+        action: "assert"
+        target: "canvas"
+        asserts:
+          operating_unit_id:
+            type: "value"
+            operator: "is_truthy"
+
+  - name: "User without operating unit access cannot read or write"
+    steps:
+      - step: "Get default warehouse"
+        action: "ref"
+        xml_id: "stock.warehouse0"
+        save_as: "warehouse"
+
+      - step: "Create inbound route"
+        action: "create"
+        model: "stock.location.route"
+        save_as: "inbound_route"
+        values:
+          name: "Test Inbound Route Canvas OU 2"
+
+      - step: "Create outbound route"
+        action: "create"
+        model: "stock.location.route"
+        save_as: "outbound_route"
+        values:
+          name: "Test Outbound Route Canvas OU 2"
+
+      - step: "Create canvas route"
+        action: "create"
+        model: "stock.location.route"
+        save_as: "canvas_route"
+        values:
+          name: "Test Canvas Route OU 2"
+
+      - step: "Create canvas type"
+        action: "create"
+        model: "sale_canvas_type"
+        save_as: "canvas_type"
+        values:
+          name: "Test Canvas Type OU 2"
+          code: "TCTOU2"
+
+      - step: "Create restricted operating unit"
+        action: "create"
+        model: "operating.unit"
+        save_as: "ou_restricted"
+        values:
+          name: "OU Restricted Test Sale Canvas"
+          code: "OURESTRICTEDTESTSC"
+          partner_id: "REC: company.partner_id.id"
+
+      - step: "Create user without access to main operating unit"
+        action: "create"
+        model: "res.users"
+        save_as: "restricted_user"
+        values:
+          name: "Restricted OU User Sale Canvas"
+          login: "restricted_ou_user_sale_canvas@example.com"
+          groups_id:
+            - - 6
+              - 0
+              - - "REF: base.group_user"
+                - "REF: ssi_sale_canvas.sale_canvas_user_group"
+                - "REF: ssi_sale_canvas_operating_unit.sale_canvas_ou_group"
+          assigned_operating_unit_ids:
+            - - 6
+              - 0
+              - - "REC: ou_restricted.id"
+
+      - step: "Create sale_canvas with main operating unit"
+        action: "create"
+        model: "sale_canvas"
+        save_as: "canvas"
+        as_user: "base.user_admin"
+        values:
+          type_id: "REC: canvas_type.id"
+          outbound_warehouse_id: "REC: warehouse.id"
+          inbound_warehouse_id: "REC: warehouse.id"
+          inbound_route_id: "REC: inbound_route.id"
+          outbound_route_id: "REC: outbound_route.id"
+          route_id: "REC: canvas_route.id"
+          outbound_location_id: "REC: warehouse.lot_stock_id.id"
+          inbound_location_id: "REC: warehouse.lot_stock_id.id"
+          pricelist_id: "REF: product.list0"
+          currency_id: "REF: base.USD"
+          salesperson_id: "REF: base.user_admin"
+          operating_unit_id: "REF: operating_unit.main_operating_unit"
+
+      - step: "Restricted user cannot read the record"
+        action: "call"
+        target: "canvas"
+        method: "read"
+        args:
+          - - "date"
+        as_user: "restricted_user"
+        expect_error:
+          type: "AccessError"
+
+      - step: "Restricted user cannot write the record"
+        action: "write"
+        target: "canvas"
+        as_user: "restricted_user"
+        expect_error:
+          type: "AccessError"
+        values:
+          type_id: "REC: canvas_type.id"
